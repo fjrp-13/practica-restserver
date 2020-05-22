@@ -13,12 +13,12 @@ const app = express();
 
 app.get('/usuario', function(req, res) {
     let start = Number(req.query.start || 0);
-    let cont = Number(req.query.countDocuments || 5);
+    let maxRecords = Number(req.query.countDocuments || 5);
     let findOptions = { estado: true }; //{ role: 'ADMIN_ROLE' };
     let returnedFields = 'nombre email role estado google img';
     Usuario.find(findOptions, returnedFields)
         .skip(start)
-        .limit(cont)
+        .limit(maxRecords)
         .exec((err, usuarios) => {
             if (err) {
                 return res.status(400).json({
