@@ -4,6 +4,7 @@ require('./config/config.js');
 // Require necesarios
 const express = require('express');
 const mongoose = require('mongoose');
+const path = require('path'); // importar la utilidad "PATH" de Node para poder resolver path's
 
 // Iniciar el express
 const app = express();
@@ -14,6 +15,11 @@ const bodyParser = require('body-parser');
 app.use(bodyParser.urlencoded({ extended: false }));
 // parse application/json
 app.use(bodyParser.json());
+
+
+// Habilitar la carpeta public
+const publicPath = path.resolve(__dirname, '../public'); // Resolver el path
+app.use(express.static(publicPath));
 
 // Importación global de rutas
 app.use(require('./routes/index'));
