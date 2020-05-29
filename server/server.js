@@ -28,7 +28,8 @@ app.use(require('./routes/index'));
 mongoose.connect(process.env.URLDB, { //'mongodb://localhost:27017/cafe', {
     useNewUrlParser: true,
     useCreateIndex: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: false
 }, (err, res) => {
     if (err) throw err;
 
