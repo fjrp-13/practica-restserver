@@ -12,8 +12,10 @@ const generateRandomString = (length = 6) => Math.random().toString(20).substr(2
 
 // default options
 app.use(fileUpload({
-    useTempFiles: true,
-    tempFileDir: '/public/tmp/'
+    useTempFiles: true
+        /*,
+            tempFileDir: '/public/tmp/'
+            */
 }));
 
 app.get('/upload/:tipo/:filename', function(req, res) {
@@ -29,10 +31,10 @@ app.put('/upload/:tipo/:id', function(req, res) {
     let tipo = req.params.tipo;
     let id = req.params.id;
 
-    return res.json({
+    /*return res.json({
         success: true,
         fjrp: "fjrp2"
-    });
+    });*/
 
     // Validar tipo del Upload
     if (tiposValidos.indexOf(tipo.toLowerCase()) < 0) {
@@ -73,10 +75,10 @@ app.put('/upload/:tipo/:id', function(req, res) {
     let sufijo = generateRandomString();
     let nombreArchivo = `${id}-${sufijo}.${extension}`;
     let filepath = `uploads/${tipo}s/${nombreArchivo}`;
-    return res.json({
+    /*return res.json({
         success: true,
         fjrp: "fjrp"
-    });
+    });*/
 
     // Use the mv() method to place the file somewhere on your server
     archivo.mv(filepath, function(err) {
@@ -179,7 +181,6 @@ function imagenProducto(res, id, filename) {
         }
         // Borrar la imagen actual
         let imagenActual = productoDB.img;
-        console.log(imagenActual);
         borrarArchivo(folder, imagenActual);
 
         // Actualizar imagen
