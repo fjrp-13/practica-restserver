@@ -21,10 +21,21 @@ app.get('/imagen/:tipo/:img', verificaTokenURL, function(req, res) {
     } else {
         res.sendFile(pathNoImg);
     }
+});
 
+app.get('/imagen2/:tipo/:img', function(req, res) {
+    let tipo = req.params.tipo;
+    let filename = req.params.img;
+    let folder = `${tipo}s`;
+    let pathNoImg = path.resolve(__dirname, `../assets/img/no-image.jpg`);
 
-
-
+    let pathImagen = path.resolve(__dirname, `../../uploads/${folder}/${filename}`);
+    // Mirar si existe la imagen
+    if (fs.existsSync(pathImagen)) {
+        res.sendFile(pathImagen);
+    } else {
+        res.sendFile(pathNoImg);
+    }
 });
 
 module.exports = app;
