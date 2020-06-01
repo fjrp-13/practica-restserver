@@ -29,6 +29,11 @@ app.put('/upload/:tipo/:id', function(req, res) {
     let tipo = req.params.tipo;
     let id = req.params.id;
 
+    return res.json({
+        success: true,
+        fjrp: "fjrp2"
+    });
+
     // Validar tipo del Upload
     if (tiposValidos.indexOf(tipo.toLowerCase()) < 0) {
         return res.status(500).json({
