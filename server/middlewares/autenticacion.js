@@ -19,11 +19,36 @@ let verificaToken = (req, res, next) => {
 
         // Nuestro "payload" definido en el login.js devuelve el objeto "usuario"
         req.usuario = decoded.usuario;
-        // Le defimos que continúe con la siguiente función
+        // Le decimos que continúe con la siguiente función
         next();
     });
 
 }; // verificaToken
+
+// =============================
+// Verificar Token URL
+// =============================
+let verificaTokenURL = (req, res, next) => {
+    let token = req.query.token;
+    // Comprobar que el token es válido
+    jwt.verify(token, process.env.SEED, (err, decoded) => {
+        // decoded: es el "payload" del JWT
+        if (err) {
+            return res.status(401).json({
+                success: false,
+                err: {
+                    message: 'token no válido'
+                }
+            });
+        }
+
+        // Nuestro "payload" definido en el login.js devuelve el objeto "usuario"
+        req.usuario = decoded.usuario;
+        // Le decimos que continúe con la siguiente función
+        next();
+    });
+
+}; // verificaTokenURL
 
 // =============================
 // Verificar ADMIN_ROLE
@@ -43,5 +68,6 @@ let verificaAdminRole = (req, res, next) => {
 
 module.exports = {
     verificaToken,
-    verificaAdminRole
+    verificaAdminRole,
+    verificaTokenURL
 }
