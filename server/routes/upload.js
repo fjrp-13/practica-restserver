@@ -16,6 +16,12 @@ app.use(fileUpload({
     tempFileDir: '/public/tmp/'
 }));
 
+app.get('/upload/:tipo/:filename', function(req, res) {
+    let tipo = req.params.tipo;
+    let filename = req.params.filename;
+
+});
+
 // Parámetro "tipo": usuario o producto
 // Parámetro "id": id del usuario  o producto
 app.put('/upload/:tipo/:id', function(req, res) {
@@ -62,6 +68,10 @@ app.put('/upload/:tipo/:id', function(req, res) {
     let sufijo = generateRandomString();
     let nombreArchivo = `${id}-${sufijo}.${extension}`;
     let filepath = `uploads/${tipo}s/${nombreArchivo}`;
+    return res.json({
+        success: true,
+        fjrp: "fjrp"
+    });
 
     // Use the mv() method to place the file somewhere on your server
     archivo.mv(filepath, function(err) {
